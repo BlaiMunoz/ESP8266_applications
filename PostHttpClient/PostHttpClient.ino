@@ -18,16 +18,16 @@
    then put your PC's IP address in SERVER_IP below, port 9080 (instead of default 80):
 */
 //#define SERVER_IP "10.0.1.7:9080" // PC address with emulation on host
-#define SERVER_IP "192.168.1.42"
+#define SERVER_IP "ptsv2.com"
 
 #ifndef STASSID
-#define STASSID "your-ssid"
-#define STAPSK  "your-password"
+#define STASSID "Lowi8804"
+#define STAPSK  "RU9CXVUPEW52PH"
 #endif
 
 void setup() {
 
-  USE_SERIAL.begin(115200);
+  USE_SERIAL.begin(9600);
 
   USE_SERIAL.println();
   USE_SERIAL.println();
@@ -54,12 +54,12 @@ void loop() {
 
     USE_SERIAL.print("[HTTP] begin...\n");
     // configure traged server and url
-    http.begin(client, "http://" SERVER_IP "/postplain/"); //HTTP
+    http.begin(client, "http://" SERVER_IP "/t/xrdfk-1582909850/post"); //HTTP
     http.addHeader("Content-Type", "application/json");
 
     USE_SERIAL.print("[HTTP] POST...\n");
     // start connection and send HTTP header and body
-    int httpCode = http.POST("{\"hello\":\"world\"}");
+    int httpCode = http.POST("{\"hello\":\"world\",\"Esto_es\":\"una_prueba\"}");
 
     // httpCode will be negative on error
     if (httpCode > 0) {
@@ -76,7 +76,7 @@ void loop() {
     } else {
       USE_SERIAL.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
-
+    delay(10000);
     http.end();
   }
 
